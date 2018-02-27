@@ -1,0 +1,67 @@
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="./index.html" class="right">Home</a>
+        <span id="nav-mobile" class="left hide-on-med-and-down">
+          <a href="./1_Create_Your_Profile.html" class="breadcrumb">Enroll New User</a>
+        </span>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="container animated fadeIn">
+  <div class="row">
+    <div class="col s12 m10 offset-m1">
+      <div class="card">
+        <div class="card-title center-align">
+          <h4>Create Your Profile</h4>
+        </div>
+        <div class="card-content">
+          <form action="#" id="signup" name="signup">
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="first-name" type="text" class="validate" name="firstname">
+                <label for="first-name">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="last-name" type="text" class="validate" name="lastname">
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="email" type="email" class="validate" name="email">
+                <label for="email">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="password" type="password" class="validate" name="password">
+                <label for="password">Password</label>
+              </div>
+            </div>
+            <div class="file-field input-field">
+              <div class="btn" id="upload">
+                <span>Upload Photo</span>
+                <input type="file" />
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" id="img" name="img" />
+              </div>
+            </div>
+            <div class="input-field">
+              <span>Date of Birth:</span>
+              <input type="text" class="datepicker" id="dob" name="dob">
+            </div>
+            <div class="input-field right-align">
+              <button class="btn" id="submit" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
