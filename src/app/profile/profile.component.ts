@@ -13,7 +13,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.httpClient.get('./api/customer')
       .subscribe((data: any) => {
-        this.customer = data.first_name;
+        console.log(data);
+        this.customer = data.firstName;
         console.log(typeof this.customer);
         console.log(this.customer);
       });

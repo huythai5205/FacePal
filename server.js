@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const passport = require('passport');
 
 const app = express();
 const db = require('./models');
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+
 
 require('./controllers/customer_controller.js')(app);
 

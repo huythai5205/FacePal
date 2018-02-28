@@ -1,67 +1,53 @@
-<div class="navbar-fixed">
-  <nav>
-    <div class="nav-wrapper">
-      <div class="col s12">
-        <a href="./index.html" class="right">Home</a>
-        <span id="nav-mobile" class="left hide-on-med-and-down">
-          <a href="./1_Create_Your_Profile.html" class="breadcrumb">Enroll New User</a>
-        </span>
-      </div>
-    </div>
-  </nav>
-</div>
-<div class="container animated fadeIn">
-  <div class="row">
-    <div class="col s12 m10 offset-m1">
-      <div class="card">
-        <div class="card-title center-align">
-          <h4>Create Your Profile</h4>
-        </div>
-        <div class="card-content">
-          <form action="#" id="signup" name="signup">
-            <div class="row">
-              <div class="input-field col s6">
-                <input id="first-name" type="text" class="validate" name="firstname">
-                <label for="first-name">First Name</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="last-name" type="text" class="validate" name="lastname">
-                <label for="last_name">Last Name</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="email" type="email" class="validate" name="email">
-                <label for="email">Email</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="password" type="password" class="validate" name="password">
-                <label for="password">Password</label>
-              </div>
-            </div>
-            <div class="file-field input-field">
-              <div class="btn" id="upload">
-                <span>Upload Photo</span>
-                <input type="file" />
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" id="img" name="img" />
-              </div>
-            </div>
-            <div class="input-field">
-              <span>Date of Birth:</span>
-              <input type="text" class="datepicker" id="dob" name="dob">
-            </div>
-            <div class="input-field right-align">
-              <button class="btn" id="submit" type="submit" name="action">Submit
-                <i class="material-icons right">send</i>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+<h4>Create Your Profile</h4>
+
+<form (ngSubmit)="onSubmit()" #signUpForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
+
+  <div class="form-group">
+    <label for="firstName">First Name {{customer.firstName}}</label>
+    <input id="firstName" type="text" class="form-control" name="firstName" required [(ngModel)]="customer.firstName" #firstName="ngModel"
+      (change)="log(firstName)">
+    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required</div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name {{customer.lastName}}</label>
+    <input id="lastName" type="text" class="form-control" name="lastName" required [(ngModel)]="customer.lastName" #lastName="ngModel">
+    <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">Last Name is required</div>
+  </div>
+
+  <div class="form-group">
+    <label for="DOB">Date of Birth {{customer.DOB}}</label>
+    <input id="DOB" type="date" class="form-control" name="DOB" required [(ngModel)]="customer.DOB" #DOB="ngModel">
+    <div class="alert alert-danger" *ngIf="DOB.touched && !DOB.valid">Date of Birth is required</div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">email {{customer.email}}</label>
+    <input id="email" type="text" class="form-control" name="email" required pattern="email" [(ngModel)]="customer.email" #email="ngModel"
+      (change)="log(email)">
+    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+      <div *ngIf="email.errors.required">Photo is required</div>
+      <div *ngIf="email.errors.pattern">Need to be in email format</div>
     </div>
   </div>
-</div>
+
+
+  <div class="form-group">
+    <label for="password">Password {{customer.password}}</label>
+    <input id="password" type="text" class="form-control" name="password" required [(ngModel)]="customer.password" #password="ngModel">
+    <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Password is required</div>
+  </div>
+
+  <div class="form-group">
+    <label for="photo">Photo {{customer.photo}}</label>
+    <input id="photo" type="text" class="form-control" name="photo" required pattern="url" [(ngModel)]="customer.photo" #photo="ngModel"
+      (change)="log(photo)">
+    <div class="alert alert-danger" *ngIf="photo.touched && !photo.valid">
+      <div *ngIf="photo.errors.required">Email is required</div>
+      <div *ngIf="photo.errors.pattern">Need to be in url format</div>
+    </div>
+  </div>
+
+
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
