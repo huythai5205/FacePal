@@ -4,6 +4,8 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { AsyncLocalStorageModule } from 'angular-async-local-storage';
+
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    AsyncLocalStorageModule,
     ReactiveFormsModule
   ],
   providers: [],

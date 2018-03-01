@@ -19,9 +19,9 @@ export class SignUpComponent {
   }
 
   onSubmit() {
-    //TODO: DELETE localhost:3000
+    //TODO: DELETE localhost:3000 when deploy to heroku
     this.httpClient.post('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
-      console.log("sucessfully create customer");
+      console.log("successfully create customer");
     });
     console.log("submit", this.customer);
   }

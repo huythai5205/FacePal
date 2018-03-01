@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AsyncLocalStorage } from 'angular-async-local-storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -8,16 +10,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProfileComponent implements OnInit {
   customer;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, protected localStorage: AsyncLocalStorage, private router: Router) { }
 
   ngOnInit() {
-    this.httpClient.get('./api/customer')
-      .subscribe((data: any) => {
-        console.log(data);
-        this.customer = data.firstName;
-        console.log(typeof this.customer);
-        console.log(this.customer);
-      });
+    this.localStorage.getItem('customer').subscribe((customer) => {
+      console.log(customer);
+      this.customer = customer;
+    });
   }
 
 }
