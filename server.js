@@ -2,10 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
+const cors = require('cors');
 
 const app = express();
 const db = require('./models');
-const PORT = process.env.PORT || 4200;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static('dist'));
 
@@ -16,8 +17,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-require('./controllers/customer_controller.js')(app);
-
+require('./controllers/customer_controller.js')(app.use(cors()));
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, function () {

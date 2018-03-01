@@ -19,7 +19,8 @@ export class SignUpComponent {
   }
 
   onSubmit() {
-    this.httpClient.post('./api/customer', this.customer).subscribe((data: any) => {
+    //TODO: DELETE localhost:3000
+    this.httpClient.post('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
       console.log("sucessfully create customer");
     });
     console.log("submit", this.customer);
