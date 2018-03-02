@@ -1,12 +1,28 @@
-<h1>Welcome to {{title}}</h1>
-
-<nav>
-  <a routerLink="home">Home</a>
-  <a routerLink="signUp">Sign Up</a>
-  <a routerLink="logIn">Log In</a>
-  <a routerLink="profile">Profile</a>
-  <a (click)="logOut()">Log Out</a>
+<nav class="nav-extended">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">FacePal</a>
+  </div>
+  <div class="nav-content">
+    <ul class="tabs tabs-transparent">
+      <li class="tab">
+        <a routerLink="home">Home</a>
+      </li>
+      <li *ngIf="!isSignIn" class="tab">
+        <a routerLink="signUp">Sign Up</a>
+      </li>
+      <li *ngIf="!isSignIn" class="tab">
+        <a routerLink="logIn">Log In</a>
+      </li>
+      <li *ngIf="isSignIn" class="tab">
+        <a routerLink="profile">Profile</a>
+      </li>
+      <li *ngIf="isSignIn" class="tab">
+        <a (click)="logOut()">Log Out</a>
+      </li>
+    </ul>
+  </div>
 </nav>
+
 
 <!--router views-->
 <router-outlet></router-outlet>

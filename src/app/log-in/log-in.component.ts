@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css']
 })
+
 export class LogInComponent {
 
-  constructor(private httpClient: HttpClient, protected localStorage: AsyncLocalStorage, private router: Router) { }
+  constructor(private httpClient: HttpClient, protected localStorage: AsyncLocalStorage, private router: Router, private appComponent: AppComponent) { }
   customer = {
     email: '',
     password: ''
@@ -24,6 +26,8 @@ export class LogInComponent {
       if (data) {
         console.log("you're logged in");
         this.localStorage.setItem('customer', data).subscribe(() => {
+          this.appComponent.isSignIn = true;
+          this.appComponent.customer = data;
           this.router.navigate(['profile']);
         });
       } else {
