@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 import { MaterializeModule } from 'angular2-materialize';
+import { WebcamModule } from 'ngx-webcam';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MaterializeModule } from 'angular2-materialize';
     FormsModule,
     AsyncLocalStorageModule,
     ReactiveFormsModule,
-    MaterializeModule
+    MaterializeModule,
+    WebcamModule
   ],
   providers: [],
   bootstrap: [AppComponent]

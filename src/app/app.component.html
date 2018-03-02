@@ -8,16 +8,19 @@
         <a routerLink="home">Home</a>
       </li>
       <li *ngIf="!isSignIn" class="tab">
-        <a routerLink="signUp">Sign Up</a>
+        <a routerLink="signup">Sign Up</a>
       </li>
       <li *ngIf="!isSignIn" class="tab">
-        <a routerLink="logIn">Log In</a>
+        <a routerLink="login">Log In</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
         <a routerLink="profile">Profile</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
         <a (click)="logOut()">Log Out</a>
+      </li>
+      <li class="tab">
+        <a routerLink="verify-customer">verify-customer</a>
       </li>
     </ul>
   </div>

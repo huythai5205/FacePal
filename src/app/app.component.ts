@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
         this.customer = customer;
         this.isSignIn = true;
       }
-      this.router.navigate(['signUp']);
+      this.router.navigate(['signup']);
     });
   }
 

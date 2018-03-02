@@ -1,0 +1,19 @@
+<p>
+  verify-customer works!
+</p>
+
+<div style="text-align:center">
+  <h1>
+    Ngx-Webcam Demo
+  </h1>
+
+  <div>
+    <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+    <br/>
+    <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
+  </div>
+</div>
+
+<div class="snapshot" *ngIf="webcamImage">
+  <img [src]="webcamImage.imageAsDataUrl" />
+</div>
