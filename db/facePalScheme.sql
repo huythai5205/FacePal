@@ -4,7 +4,11 @@ DROP DATABASE IF EXISTS FacePal;
 CREATE DATABASE FacePal;
 
 
+
 use FacePal;
+
+CREATE TABLE `customers`(
+);
 
 INSERT customers(firstName, lastName, email, password, photo, DOB, createdAt, updatedAt) values( '1','1','1','1','1','1', curdate(),curdate());
 INSERT customers(firstName, lastName, email, password, photo, DOB, createdAt, updatedAt) values( '2','2','2','2','2','2', curdate(),curdate());
