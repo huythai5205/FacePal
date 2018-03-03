@@ -31,23 +31,40 @@
     </div>
   </div>
 
-
   <div class="form-group">
     <label for="password">Password {{customer.password}}</label>
     <input id="password" type="text" class="form-control" name="password" required [(ngModel)]="customer.password" #password="ngModel">
     <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Password is required</div>
   </div>
-
-  <div class="form-group">
-    <label for="photo">Photo {{customer.photo}}</label>
-    <input id="photo" type="text" class="form-control" name="photo" required pattern="url" [(ngModel)]="customer.photo" #photo="ngModel"
-      (change)="log(photo)">
-    <div class="alert alert-danger" *ngIf="photo.touched && !photo.valid">
-      <div *ngIf="photo.errors.required">Email is required</div>
-      <div *ngIf="photo.errors.pattern">Need to be in url format</div>
-    </div>
-  </div>
-
+  <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">takeAPicture</a>
 
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
+
+<!-- Modal Trigger -->
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div style="text-align:center">
+      <h1>
+        Ngx-Webcam Demo
+      </h1>
+
+      <div>
+        <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+        <br/>
+        <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
+      </div>
+
+      <div class="snapshot" *ngIf="webcamImage">
+        <img [src]="webcamImage.imageAsDataUrl" />
+      </div>
+    </div>
+    <button (click)="onSubmit();">click</button>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>

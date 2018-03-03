@@ -7,7 +7,9 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     password: DataTypes.STRING,
-    photo: DataTypes.STRING
+    photo: DataTypes.STRING,
+    availableFunds: DataTypes.double,
+
   });
   return Customer;
 }

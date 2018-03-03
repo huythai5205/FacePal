@@ -41,39 +41,79 @@ export class VerifyCustomerComponent {
     // const urlString: string = 'https://api.kairos.com/gallery/list_all';
 
 
-    const firstName = 'Barack';
-    const lastName = 'Obama';
-    const profileImage = 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Official_portrait_of_Barack_Obama.jpg';
+    //   const firstName = 'Garvis';
+    //   const lastName = 'Sloane';
+    //   const profileImage = 'http://wildwestfareast.com/FacePal/user_images/testFace.jpg';
 
-    // const headers = new HttpHeaders();
-    // headers.set('content-Type', 'application/json');
-    // headers.set('app_id', '299078c0');
-    // headers.set('app_key', '0004235442d8fe37c6a315b2de0a40e8');
+    //   // const headers = new HttpHeaders();
+    //   // headers.set('content-Type', 'application/json');
+    //   // headers.set('app_id', '299078c0');
+    //   // headers.set('app_key', '0004235442d8fe37c6a315b2de0a40e8');
 
-    // const params = new HttpParams();
-    // params.set('image', profileImage);
-    // params.set('subject_id', firstName + lastName);
-    // params.set('gallery_name', 'FirstGallery');
+    //   // const params = new HttpParams();
+    //   // params.set('image', profileImage);
+    //   // params.set('subject_id', firstName + lastName);
+    //   // params.set('gallery_name', 'FirstGallery');
 
-    this.data = this.httpClient.get(corsString + urlString, {
-      headers: {
-        'content-Type': 'application/json',
-        'app_id': '299078c0',
-        'app_key': '0004235442d8fe37c6a315b2de0a40e8'
-      },
-      observe: 'response',
-      params: {
-        'image': profileImage,
-        'subject_id': firstName + lastName,
-        'gallery_name': 'FirstGallery'
+    //   this.data = this.httpClient.get(corsString + urlString, {
+    //     headers: {
+    //       'content-Type': 'application/json',
+    //       'app_id': '299078c0',
+    //       'app_key': '0004235442d8fe37c6a315b2de0a40e8'
+    //     },
+    //     observe: 'response',
+    //     params: {
+    //       'image': profileImage,
+    //       'gallery_name': 'FirstGallery',
+    //       'subject_id': firstName + lastName
+    //     }
+    //   }).subscribe(
+    //     data => {
+    //       console.log(data);
+    //     }
+    //   );
+
+    // }
+
+    //////old enroll
+
+    var request = new XMLHttpRequest();
+
+    request.open("POST", "https://api.kairos.com/enroll");
+
+    request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader("app_id", "299078c0");
+    request.setRequestHeader("app_key", "0004235442d8fe37c6a315b2de0a40e8");
+
+    request.onreadystatechange = function () {
+      if (this.readyState === 4) {
+        console.log("Status:", this.status);
+        console.log("Headers:", this.getAllResponseHeaders());
+        console.log("Body:", this.responseText);
       }
-    }).subscribe(
-      data => {
-        console.log(data);
-      }
-    );
+    };
 
-  }
+    var body = {
+      'image': 'http://wildwestfareast.com/FacePal/user_images/testFace.jpg',
+      'subject_id': 'GarvisSloane',
+      'gallery_name': "FirstGallery",
+    };
+
+    // //test
+    // console.log('enroll.js log' + img);
+    // console.log('enroll.js log' + firstName);
+    // console.log('enroll.js log' + lastName);
+
+    request.send(JSON.stringify(body));
+
+  };
+
+
+
+
+
+
+
 
   onSubmit2() {
 
