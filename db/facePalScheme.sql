@@ -15,3 +15,8 @@ INSERT customers(firstName, lastName, email, password, photo, DOB, createdAt, up
 
 
 select * from customers;
+
+-- heroku login
+-- Host	b4e9xxkxnpu2v96i.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	
+-- Username	dtgo9kwg8iextfpk	
+-- Password	ooem4c2m1dv64hwa
