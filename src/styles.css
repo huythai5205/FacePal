@@ -1,1 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
+
+  body {
+    background: url("./assets/images/Depositphotos_11189888_l-2015.jpg") no-repeat
+      center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* background-color: #fee140; */
+    /* background-image: linear-gradient(90deg, #fee140 0%, #fa709a 100%); */
+  }
+  h4,
+  .collection .collection-item {
+    color: white;
+  }
+  
+  nav {
+    padding: 0px 20px;
+    background: transparent;
+    box-shadow: none;
+  }
+  
+  .card {
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .card .card-action,
+  .collection .collection-item {
+    background: transparent;
+  }
+  
+  .card-title {
+    padding-top: 0.1rem;
+  }
+  input {
+    color: white;
+  }
+  
+  .modal input {
+    color: black;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .collection {
+    border: transparent;
+  }
+  
+  .collection-item img {
+    max-width: 200px;
+  }
+  
+  #view_data {
+    padding: 10px 0;
+    color: #ff0000;
+    word-wrap: break-word;
+  }
+  #authenticationError {
+    color: #ff0000;
+  }
+  .method-test {
+    margin-left: 30px;
+  }
+  .glyphicon {
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
+  }
+  /* form {
+    margin-left: 30px;
+  } */
+  #loader {
+    display: none;
+    width: 250px;
+    float: left;
+  }
+  
