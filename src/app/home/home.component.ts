@@ -26,6 +26,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.router.navigate(["login"]);
   }
   autoplay() {
-    $('.carousel').carousel('next'), 4000);
+    $('.carousel').carousel(('next'), 4000);
   }
 }
