@@ -4,7 +4,9 @@ const bcrypt = require('bcrypt');
 module.exports = function (app) {
 
   app.get('/api/customers', (req, res) => {
-    db.Customer.findAll({}).then((data) => {
+    db.Customer.findAll({
+      include: [db.Transaction]
+    }).then((data) => {
       res.json(data);
     });
   });
@@ -17,7 +19,8 @@ module.exports = function (app) {
     db.Customer.find({
       where: {
         email: email
-      }
+      },
+      include: [db.Transaction]
     }).then((data) => {
       bcrypt.compare(password, data.password, function (err, bRes) {
         if (err) console.log(err);
@@ -44,7 +47,9 @@ module.exports = function (app) {
 
   app.put('/api/customer', (req, res) => {
     console.log("updating customer", req.body);
-
+    db.Customer.update(req.body).then((data) => {
+      res.json(data);
+    });
   });
 
   app.delete('/api/customer', (req, res) => {

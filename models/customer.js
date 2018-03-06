@@ -8,8 +8,16 @@ module.exports = function (sequelize, DataTypes) {
     },
     password: DataTypes.STRING,
     photo: DataTypes.STRING,
-    availableFunds: DataTypes.double,
-
+    availableFunds: {
+      type: DataTypes.DOUBLE,
+      defaultValue: 0
+    }
   });
+
+  Customer.associate = function (models) {
+    Customer.hasMany(models.Transaction, {
+      onDelete: "cascade"
+    });
+  }
   return Customer;
 }

@@ -16,7 +16,10 @@ INSERT customers(firstName, lastName, email, password, photo, DOB, createdAt, up
 
 select * from customers;
 
--- heroku login
--- Host	b4e9xxkxnpu2v96i.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	
--- Username	dtgo9kwg8iextfpk	
--- Password	ooem4c2m1dv64hwa
+use facepal;
+
+insert into transactions( send_to, amount, CustomerId, createdAt, updatedAt) values('1', 100, 1, now(), now());
+
+insert into transactions( receive_from, amount, CustomerId, createdAt, updatedAt) values('2', 200, 1, now(), now());
+
+select * from transactions;
