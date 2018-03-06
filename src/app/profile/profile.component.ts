@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AppComponent } from '../app.component';
-import { bcrypt } from 'bcrypt';
 
 //webcam
 import { Subject } from "rxjs/Subject";
