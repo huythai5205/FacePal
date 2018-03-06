@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
   styleUrls: ['./verify-customer.component.css']
 })
 export class VerifyCustomerComponent {
-  data;
+
   constructor(private httpClient: HttpClient) { }
 
   // webcam snapshot trigger
@@ -34,52 +34,16 @@ export class VerifyCustomerComponent {
     return this.trigger.asObservable();
   }
 
+  sendTransaction() {
+
+  }
+
   onSubmit() {
 
-    const corsString: string = 'https://cors-anywhere.herokuapp.com/';
-    const urlString: string = 'https://api.kairos.com/enroll';
-    // const urlString: string = 'https://api.kairos.com/gallery/list_all';
-
-
-    //   const firstName = 'Garvis';
-    //   const lastName = 'Sloane';
-    //   const profileImage = 'http://wildwestfareast.com/FacePal/user_images/testFace.jpg';
-
-    //   // const headers = new HttpHeaders();
-    //   // headers.set('content-Type', 'application/json');
-    //   // headers.set('app_id', '299078c0');
-    //   // headers.set('app_key', '0004235442d8fe37c6a315b2de0a40e8');
-
-    //   // const params = new HttpParams();
-    //   // params.set('image', profileImage);
-    //   // params.set('subject_id', firstName + lastName);
-    //   // params.set('gallery_name', 'FirstGallery');
-
-    //   this.data = this.httpClient.get(corsString + urlString, {
-    //     headers: {
-    //       'content-Type': 'application/json',
-    //       'app_id': '299078c0',
-    //       'app_key': '0004235442d8fe37c6a315b2de0a40e8'
-    //     },
-    //     observe: 'response',
-    //     params: {
-    //       'image': profileImage,
-    //       'gallery_name': 'FirstGallery',
-    //       'subject_id': firstName + lastName
-    //     }
-    //   }).subscribe(
-    //     data => {
-    //       console.log(data);
-    //     }
-    //   );
-
-    // }
-
-    //////old enroll
 
     var request = new XMLHttpRequest();
 
-    request.open("POST", "https://api.kairos.com/enroll");
+    request.open("POST", "https://api.kairos.com/verify");
 
     request.setRequestHeader("Content-Type", "application/json");
     request.setRequestHeader("app_id", "299078c0");
@@ -89,7 +53,11 @@ export class VerifyCustomerComponent {
       if (this.readyState === 4) {
         console.log("Status:", this.status);
         console.log("Headers:", this.getAllResponseHeaders());
-        console.log("Body:", this.responseText);
+        const res = JSON.parse(this.responseText);
+        console.log("Body:", res);
+        if (res.images[0].transaction.confidence > 0.6) {
+
+        }
       }
     };
 
@@ -99,67 +67,8 @@ export class VerifyCustomerComponent {
       'gallery_name': "FirstGallery",
     };
 
-    // //test
-    // console.log('enroll.js log' + img);
-    // console.log('enroll.js log' + firstName);
-    // console.log('enroll.js log' + lastName);
-
     request.send(JSON.stringify(body));
 
   };
-
-
-
-
-
-
-
-
-  onSubmit2() {
-
-    const corsString: string = 'https://cors-anywhere.herokuapp.com/';
-    const urlString: string = 'https://developer.nps.gov/api/v1/parks?stateCode=co';
-
-
-    // let key = 'ZKLb9xO0SnI4KkfXFdoM9fmLuFkJqtfVtXKPpxM0';
-    // const headers = new HttpHeaders();
-    // headers.set('X-Api-Key', key);
-
-
-    this.data = this.httpClient.get(corsString + urlString, {
-      headers: {
-        'content-Type': 'application/json',
-        'X-Api-Key': 'ZKLb9xO0SnI4KkfXFdoM9fmLuFkJqtfVtXKPpxM0'
-      },
-      observe: 'response'
-    }).subscribe(
-      data => {
-        console.log(data);
-      }
-    );
-  }
-
-  onSubmit3() {
-
-
-    const corsString: string = 'https://cors-anywhere.herokuapp.com/';
-    const urlString: string = 'https://developer.nps.gov/api/v1/parks?stateCode=co';
-
-
-    let key = 'ZKLb9xO0SnI4KkfXFdoM9fmLuFkJqtfVtXKPpxM0';
-    const headers = new HttpHeaders();
-    headers.set('X-Api-Key', key);
-
-
-    this.data = this.httpClient.get(corsString + urlString, { headers, observe: 'response' }).subscribe(
-      data => {
-        console.log(data);
-      }
-    );
-  }
-
-  callAPI(url, body, headers) {
-
-  }
 
 }
