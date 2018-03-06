@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 require('./controllers/customer_controller.js')(app.use(cors()));
+require('./controllers/transaction_controller.js')(app.use(cors()));
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, function () {

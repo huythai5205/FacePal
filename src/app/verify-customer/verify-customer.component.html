@@ -1,23 +1,53 @@
-<p>
-  verify-customer works!
-</p>
+<h4>Send Money</h4>
 
-<div style="text-align:center">
-  <h1>
-    Ngx-Webcam Demo
-  </h1>
+<form (ngSubmit)="onSubmit()" #signUpForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
 
-  <div>
-    <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
-    <br/>
-    <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
+
+  <div class="form-group">
+    <label for="email">email {{transaction.receiver}}</label>
+    <input id="email" type="text" class="form-control" name="email" required pattern="email" [(ngModel)]="transaction.receiver" #email="ngModel">
+    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+      <div *ngIf="email.errors.required">Photo is required</div>
+      <div *ngIf="email.errors.pattern">Need to be in email format</div>
+    </div>
   </div>
 
-  <div class="snapshot" *ngIf="webcamImage">
-    <img [src]="webcamImage.imageAsDataUrl" />
+  <div class="form-group">
+    <label for="amount">amount {{transaction.amount}}</label>
+    <input id="amount" type="number" class="form-control" name="amount" required [(ngModel)]="transaction.amount" #amount="ngModel">
+    <div class="alert alert-danger" *ngIf="amount.touched && !amount.valid">
+      <div *ngIf="amount.errors.required">Photo is required</div>
+      <div *ngIf="amount.errors.pattern">Need to be in email format</div>
+    </div>
   </div>
 
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<!-- Modal Trigger -->
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div style="text-align:center">
+      <h1>
+        Ngx-Webcam Demo
+      </h1>
+
+      <div>
+        <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+        <br/>
+        <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
+      </div>
+
+      <div class="snapshot" *ngIf="webcamImage">
+        <img [src]="webcamImage.imageAsDataUrl" />
+      </div>
+    </div>
+    <button (click)="onSubmit();">click</button>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
 </div>
-
-
-<button (click)="onSubmit();">click</button>

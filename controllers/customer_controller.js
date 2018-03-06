@@ -29,6 +29,7 @@ module.exports = function (app) {
     });
   });
 
+
   app.post('/api/customer', (req, res) => {
     console.log("creating customer", req.body);
     bcrypt.genSalt(11, function (err, salt) {
@@ -48,6 +49,34 @@ module.exports = function (app) {
   app.put('/api/customer', (req, res) => {
     console.log("updating customer", req.body);
     db.Customer.update(req.body).then((data) => {
+      res.json(data);
+    });
+  });
+
+  app.put('/api/addFunds', (req, res) => {
+    console.log("updating customer", req.body);
+    db.Customer.findOne({
+      where: {
+        email: req.body.email
+      }
+    }).then((data) => {
+      data.decrement('availableFunds', {
+        by: req.body.amount
+      });
+      res.json(data);
+    });
+  });
+
+  app.put('/api/subtractFunds', (req, res) => {
+    console.log("updating customer", req.body);
+    db.Customer.findOne({
+      where: {
+        email: req.body.email
+      }
+    }).then((data) => {
+      data.increment('availableFunds', {
+        by: req.body.amount
+      });
       res.json(data);
     });
   });

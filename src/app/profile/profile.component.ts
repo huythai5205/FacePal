@@ -45,12 +45,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    if (this.oldPassword === this.customer.password) {
-
-      this.httpClient.put('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
-        console.log("successfully create customer");
-      });
-    }
+    this.httpClient.put('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
+      console.log("successfully create customer");
+    });
   }
 
   public triggerSnapshot(): void {
