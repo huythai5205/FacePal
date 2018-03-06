@@ -26,14 +26,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   // latest snapshot
   public webcamImage: WebcamImage = null;
+<<<<<<< HEAD
 
   private profileImg;
 
+=======
+
+  private profileImg;
+
+>>>>>>> 44b43121c23643674a337d29840e0709d7194aef
   constructor(private route: Router, private appComponent: AppComponent, private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.customer = this.appComponent.customer || this.route.navigate(['signup']);
     this.oldPassword = this.customer.password;
+<<<<<<< HEAD
     console.log(this.customer);
   }
 
@@ -58,14 +65,35 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         });
       });
     } else {
+=======
+    console.log(this.customer.Transactions);
+  }
+
+  ngAfterViewInit() {
+    $('#modal1').modal();
+  }
+
+  retakePicture() {
+    $('#modal1').modal('open');
+  }
+
+  onSubmit() {
+    if (this.oldPassword === this.customer.password) {
+
+>>>>>>> 44b43121c23643674a337d29840e0709d7194aef
       this.httpClient.put('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
         console.log("successfully create customer");
       });
     }
+<<<<<<< HEAD
 
   }
 
 
+=======
+  }
+
+>>>>>>> 44b43121c23643674a337d29840e0709d7194aef
   public triggerSnapshot(): void {
     this.trigger.next();
     console.log(this.webcamImage);

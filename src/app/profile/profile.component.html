@@ -49,6 +49,9 @@
         <span class="card-title">Your Transactions</span>
         <h6>Amount: ${{customer.amount}}</h6>
         {{customer.Transactions}}
+        <li *ngFor="let T of customer.Transactions">
+          {{T.send_to}}, {{T.receive_from}},{{T.amount}}
+        </li>
       </div>
     </div>
   </div>
