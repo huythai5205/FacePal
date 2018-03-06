@@ -1,7 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
   const Transaction = sequelize.define('Transaction', {
-    send_to: DataTypes.STRING,
-    receive_from: DataTypes.STRING,
+    sender: DataTypes.STRING,
+    receiver: DataTypes.STRING,
     amount: DataTypes.DOUBLE
   });
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// Webcam 
+// Webcam
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import { WebcamImage } from 'ngx-webcam';
@@ -71,8 +71,8 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     };
 
     var body = {
-      'image': this.verifyImage,
-      'subject_id': 'GarvisSloane',
+      'image': this.customer.photo,
+      'subject_id': this.customer.firstName + this.customer.lastName,
       'gallery_name': "FirstGallery",
     };
 
@@ -102,8 +102,8 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     console.info("received webcam image", webcamImage);
     this.webcamImage = webcamImage;
     console.log(this.webcamImage);
-    this.verifyImage = this.webcamImage.imageAsDataUrl.split(",")[1];
-    console.log(this.verifyImage);
+    this.customer.photo = this.webcamImage.imageAsDataUrl.split(",")[1];
+    console.log(this.customer.photo);
   }
 
   public get triggerObservable(): Observable<void> {
