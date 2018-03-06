@@ -1,5 +1,4 @@
 
-
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -26,6 +25,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.router.navigate(["login"]);
   }
   autoplay() {
-    $('.carousel').carousel('next'), 4000);
+    $('.carousel').carousel(('next'), 4000);
   }
 }
