@@ -6,17 +6,21 @@ import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import { WebcamImage } from 'ngx-webcam';
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
+
+declare let $: any;
 
 @Component({
   selector: 'app-verify-customer',
   templateUrl: './verify-customer.component.html',
   styleUrls: ['./verify-customer.component.css']
 })
+
 export class VerifyCustomerComponent implements OnInit {
 
   private customer;
   private verifyImage;
+  private isPicture = false;
   private transaction = {
     sender: '',
     receiver: '',
@@ -26,11 +30,20 @@ export class VerifyCustomerComponent implements OnInit {
 
   constructor(private httpClient: HttpClient, private appComponent: AppComponent, private router: Router) { }
 
+  ngAfterViewInit() {
+    $('#modal1').modal();
+  }
+
   ngOnInit() {
     this.customer = this.appComponent.customer || this.router.navigate(['signup']);
     this.transaction.sender = this.customer.email;
     this.transaction.CustomerId = this.customer.id;
   }
+
+  takeAPicture() {
+    $('#modal1').modal('open');
+  }
+
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
 
@@ -38,6 +51,7 @@ export class VerifyCustomerComponent implements OnInit {
   public webcamImage: WebcamImage = null;
 
   public triggerSnapshot(): void {
+    this.isPicture = true;
     this.trigger.next();
   }
 
@@ -83,42 +97,39 @@ export class VerifyCustomerComponent implements OnInit {
   onSubmit() {
 
 
-    //   var request = new XMLHttpRequest();
+    // var request = new XMLHttpRequest();
 
-    //   request.open("POST", "https://api.kairos.com/verify");
+    // request.open("POST", "https://api.kairos.com/verify");
 
-    //   request.setRequestHeader("Content-Type", "application/json");
-    //   request.setRequestHeader("app_id", "299078c0");
-    //   request.setRequestHeader("app_key", "0004235442d8fe37c6a315b2de0a40e8");
+    // request.setRequestHeader("Content-Type", "application/json");
+    // request.setRequestHeader("app_id", "299078c0");
+    // request.setRequestHeader("app_key", "0004235442d8fe37c6a315b2de0a40e8");
 
-    //   request.onreadystatechange = function () {
-    //     if (this.readyState === 4) {
-    //       console.log("Status:", this.status);
-    //       console.log("Headers:", this.getAllResponseHeaders());
-    //       const res = JSON.parse(this.responseText);
-    //       console.log("Body:", res);
-    //       console.log(res.images[0].transaction.confidence);
-    //       if (res.images[0].transaction.confidence > 0.6) {
-
-    //       }
+    // request.onreadystatechange = function () {
+    //   if (this.readyState === 4) {
+    //     console.log("Status:", this.status);
+    //     console.log("Headers:", this.getAllResponseHeaders());
+    //     const res = JSON.parse(this.responseText);
+    //     console.log("Body:", res);
+    //     console.log(res.images[0].transaction.confidence);
+    //     if (res.images[0].transaction.confidence > 0.6) {
+    //       //HOW TO DO CB
     //     }
-    //   };
-
-    //   var body = {
-    //     'image': this.verifyImage,
-    //     'subject_id': this.customer.firstName + this.customer.lastName,
-    //     'gallery_name': "FirstGallery",
-    //   };
-
-    //   request.send(JSON.stringify(body));
-
+    //   }
     // };
 
-    //TODO: CHANGE TO './api/customer
+    // var body = {
+    //   'image': this.verifyImage,
+    //   'subject_id': this.customer.firstName + this.customer.lastName,
+    //   'gallery_name': "FirstGallery",
+    // };
+
+    // request.send(JSON.stringify(body));
+
+
+    //check to see if there are enough funds
     if (this.customer.availableFunds >= this.transaction.amount) {
-      console.log(this.customer.availableFunds);
       this.customer.availableFunds -= +this.transaction.amount;
-      console.log(this.customer);
       this.sendTransaction();
     } else {
       console.log('not enough funds');

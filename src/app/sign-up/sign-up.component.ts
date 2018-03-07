@@ -14,46 +14,41 @@ declare let $: any;
   styleUrls: ['./sign-up.component.css']
 })
 
-export class SignUpComponent implements OnInit, AfterViewInit {
-  verifyImage: string;
-  constructor(private httpClient: HttpClient) { }
-  customer = {
+export class SignUpComponent implements AfterViewInit {
+
+  private profileImage: string;
+  private isPicture = false;
+  private customer = {
     firstName: '',
     lastName: '',
     DOB: '',
     email: '',
-    password: '',
-    photo: ''
+    password: ''
   }
 
-  ngOnInit() {
-  }
+  constructor(private httpClient: HttpClient) { }
 
   ngAfterViewInit() {
     $('#modal1').modal();
   }
+
   onSubmit() {
     //TODO: DELETE localhost:3000 when deploy to heroku
     this.httpClient.post('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
       console.log("successfully create customer");
     });
-    console.log("submit", this.customer);
     this.onEnroll();
   }
-
 
   log(x) {
     console.log(x);
   }
 
   takeAPicture() {
-    console.log("modal");
     $('#modal1').modal('open');
   }
   onEnroll() {
 
-    const corsString: string = 'https://cors-anywhere.herokuapp.com/';
-    const urlString: string = 'https://api.kairos.com/enroll'
     var request = new XMLHttpRequest();
 
     request.open("POST", "https://api.kairos.com/enroll");
@@ -71,20 +66,14 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     };
 
     var body = {
-      'image': this.customer.photo,
+      'image': this.profileImage,
       'subject_id': this.customer.firstName + this.customer.lastName,
       'gallery_name': "FirstGallery",
     };
 
-    // //test
-    // console.log('enroll.js log' + img);
-    // console.log('enroll.js log' + firstName);
-    // console.log('enroll.js log' + lastName);
-
     request.send(JSON.stringify(body));
 
   }
-
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
@@ -93,25 +82,20 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   public webcamImage: WebcamImage = null;
 
   public triggerSnapshot(): void {
+    this.isPicture = true;
     this.trigger.next();
-    console.log(this.webcamImage);
-
   }
 
   public handleImage(webcamImage: WebcamImage): void {
     console.info("received webcam image", webcamImage);
     this.webcamImage = webcamImage;
-    console.log(this.webcamImage);
-    this.customer.photo = this.webcamImage.imageAsDataUrl.split(",")[1];
-    console.log(this.customer.photo);
+    this.profileImage = this.webcamImage.imageAsDataUrl.split(",")[1];
   }
 
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
 
   }
-
-
 
 }
 
