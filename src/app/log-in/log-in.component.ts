@@ -11,7 +11,7 @@ import { AppComponent } from '../app.component';
 })
 
 export class LogInComponent {
-
+  private isIncorrect = false;
   constructor(private httpClient: HttpClient, protected localStorage: AsyncLocalStorage, private router: Router, private appComponent: AppComponent) { }
   customer = {
     email: '',
@@ -31,9 +31,9 @@ export class LogInComponent {
           this.router.navigate(['profile']);
         });
       } else {
+        this.isIncorrect = true;
         console.log("Invalid email or password");
-        this.router.navigate(['home']);
-      }                
+      }
     });
   }
 

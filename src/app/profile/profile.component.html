@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()" #signUpForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
 
-  <div class="form-group">
+  <div class=" form-group">
     <label for="firstName">First Name</label>
     <input id="firstName" type="text" class="form-control" name="firstName" required [(ngModel)]="customer.firstName" #firstName="ngModel"
       (change)="log(firstName)">

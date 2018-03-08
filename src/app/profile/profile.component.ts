@@ -17,6 +17,12 @@ declare let $: any;
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
 
+  ngOnInit() {
+    this.customer = this.appComponent.customer || this.route.navigate(['signup']);
+    this.oldPassword = this.customer.password;
+
+    console.log(this.customer);
+  }
   customer: any;
   private isPicture: boolean = false;
   private oldPassword;
@@ -30,12 +36,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   constructor(private route: Router, private appComponent: AppComponent, private httpClient: HttpClient) { }
 
-  ngOnInit() {
-    this.customer = this.appComponent.customer || this.route.navigate(['signup']);
-    this.oldPassword = this.customer.password;
 
-    console.log(this.customer);
-  }
 
   ngAfterViewInit() {
     $('#modal1').modal();
