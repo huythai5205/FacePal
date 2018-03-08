@@ -59,7 +59,8 @@
       </div>
     </div>
   </div>
-</div>
+  <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">Take A Picture</a>
+
 
 
 <!-- Modal Trigger -->
@@ -73,19 +74,16 @@
         Ngx-Webcam Demo
       </h1>
 
-      <div>
+      <div *ngIf="!isPicture">
         <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
         <br/>
         <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
       </div>
 
-      <div class="snapshot" *ngIf="webcamImage">
+      <div class="snapshot" *ngIf="webcamImage && isPicture">
         <img [src]="webcamImage.imageAsDataUrl" />
+        <button (click)="isPicture = false">Retake Picture</button>
       </div>
     </div>
-    <button (click)="onSubmit();">click</button>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
   </div>
 </div>
