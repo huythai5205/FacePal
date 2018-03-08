@@ -1,41 +1,41 @@
-<h4>Send Money</h4>
+<div class="container animated fadeIn">
+  <div class="row">
+    <div class="col s12 m10 offset-m1">
+      <div class="card">
+        <div class="card-title white-text center-align">
+          <h4>Log In</h4>
+        </div>
+        <div class="card-content">
+          <form (ngSubmit)="onSubmit()" #logInForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
+            <input type="text" placeholder="Email" name="email" [(ngModel)]="customer.email" #email="ngModel">
 
-<form (ngSubmit)="onSubmit()" #signUpForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
+            <input id="amount" type="number" name="amount" [(ngModel)]="transaction.amount" #amount="ngModel">
+            <div class="alert alert-danger" *ngIf="!isUser">
+              <h5>User doesn't exist.</h5>
+            </div>
+            <div class="alert alert-danger" *ngIf="!isFunds">
+              <h5>Not Enough Funds.</h5>
+            </div>
+            <div class="alert alert-danger" *ngIf="!isVerified">
+              <h5>Does not recognize.</h5>
+            </div>
+            <div class="alert alert-danger" *ngIf="verifyImage!=''">
+              <h5>Please take a picture.</h5>
+            </div>
 
-
-  <div class="form-group">
-    <label for="email">email {{transaction.receiver}}</label>
-    <input id="email" type="text" class="form-control" name="email" required pattern="email" [(ngModel)]="transaction.receiver"
-      #email="ngModel">
-    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-      <div *ngIf="email.errors.required">Photo is required</div>
-      <div *ngIf="email.errors.pattern">Need to be in email format</div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="form-group">
-    <label for="amount">amount {{transaction.amount}}</label>
-    <input id="amount" type="number" class="form-control" name="amount" required [(ngModel)]="transaction.amount" #amount="ngModel">
-    <div class="alert alert-danger" *ngIf="amount.touched && !amount.valid">
-      <div *ngIf="amount.errors.required">Photo is required</div>
-      <div *ngIf="amount.errors.pattern">Need to be in email format</div>
-    </div>
-  </div>
-  <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">Take A Picture</a>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-
-<!-- Modal Trigger -->
+</div>
 
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
   <div class="modal-content">
     <div style="text-align:center">
-      <h1>
-        Ngx-Webcam Demo
-      </h1>
-
       <div *ngIf="!isPicture">
         <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
         <br/>

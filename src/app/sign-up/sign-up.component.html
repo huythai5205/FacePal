@@ -8,50 +8,24 @@
 
         <div class="card-content">
           <form (ngSubmit)="onSubmit()" #signUpForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
-            <div class="row">
-              <div class="form-group">
-                <input placeholder="First Name" id="firstName" type="text" class="form-control" name="firstName" required [(ngModel)]="customer.firstName"
-                  #firstName="ngModel" (change)="log(firstName)">
-                <label for="firstName">{{customer.firstName}}</label>
-                <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required</div>
-              </div>
 
-              <div class="form-group">
-                <input placeholder="Last Name" id="lastName" type="text" class="form-control" name="lastName" required [(ngModel)]="customer.lastName"
-                  #lastName="ngModel">
-                <label for="lastName">{{customer.lastName}}</label>
-                <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">Last Name is required</div>
-              </div>
-            </div>
+            <input placeholder="First Name" type="text" name="firstName" [(ngModel)]="customer.firstName" #firstName="ngModel">
 
-            <div class="row">
-              <div class="form-group">
-                <input placeholder="Date Of Birth" id="DOB" type="date" class="form-control" name="DOB" required [(ngModel)]="customer.DOB"
-                  #DOB="ngModel">
-                <label for="DOB">{{customer.DOB}}</label>
-                <div class="alert alert-danger" *ngIf="DOB.touched && !DOB.valid">Date of Birth is required</div>
-              </div>
-            </div>
+            <input placeholder="Last Name" type="text" name="lastName" [(ngModel)]="customer.lastName" #lastName="ngModel">
 
-            <div class="row">
-              <div class="form-group">
-                <input placeholder="Email" id="email" type="text" class="form-control" name="email" required pattern="email" [(ngModel)]="customer.email"
-                  #email="ngModel" (change)="log(email)">
-                <label for="email">{{customer.email}}</label>
-                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-                </div>
-                <div *ngIf="email.errors.required">Photo is required</div>
-                <div *ngIf="email.errors.pattern">Need to be in email format</div>
-              </div>
-            </div>
+            <input placeholder="Date Of Birth" type="date" name="DOB" [(ngModel)]="customer.DOB" #DOB="ngModel">
 
-            <div class="form-group">
-              <label for="password">{{customer.password}}</label>
-              <input placeholder="Password" id="password" type="text" class="form-control" name="password" required [(ngModel)]="customer.password"
-                #password="ngModel">
-              <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Password is required</div>
+            <input placeholder="Email" type="text" name="email" [(ngModel)]="customer.email" #email="ngModel">
+
+            <input placeholder="Password" type="password" name="password" [(ngModel)]="customer.password" #password="ngModel">
+
+            <div *ngIf="isMissingFields">
+              <h5>Please fill out all fields</h5>
             </div>
-            <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">takeAPicture</a>
+            <div *ngIf="isMissingPhoto">
+              <h5>Please fill out all fields</h5>
+            </div>
+            <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">Take Picture</a>
 
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
@@ -59,31 +33,21 @@
       </div>
     </div>
   </div>
-  <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">Take A Picture</a>
 
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div style="text-align:center">
+        <div *ngIf="!isPicture">
+          <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+          <br/>
+          <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
+        </div>
 
-
-<!-- Modal Trigger -->
-
-
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-  <div class="modal-content">
-    <div style="text-align:center">
-      <h1>
-        Ngx-Webcam Demo
-      </h1>
-
-      <div *ngIf="!isPicture">
-        <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
-        <br/>
-        <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
-      </div>
-
-      <div class="snapshot" *ngIf="webcamImage && isPicture">
-        <img [src]="webcamImage.imageAsDataUrl" />
-        <button (click)="isPicture = false">Retake Picture</button>
+        <div class="snapshot" *ngIf="webcamImage && isPicture">
+          <img [src]="webcamImage.imageAsDataUrl" />
+          <button (click)="isPicture = false">Retake Picture</button>
+        </div>
       </div>
     </div>
   </div>
-</div>

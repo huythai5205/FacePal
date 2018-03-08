@@ -23,6 +23,9 @@ export class VerifyCustomerComponent implements OnInit {
   private customer;
   private verifyImage;
   private isPicture = false;
+  private isFunds = true;
+  private isUser = true;
+  private isVerified = true;
   private transaction = {
     sender: '',
     receiver: '',
@@ -59,10 +62,8 @@ export class VerifyCustomerComponent implements OnInit {
   }
 
   public handleImage(webcamImage: WebcamImage): void {
-    console.info("received webcam image", webcamImage);
     this.webcamImage = webcamImage;
     this.verifyImage = this.webcamImage.imageAsDataUrl.split(",")[1];
-    console.log(this.webcamImage);
   }
 
   public get triggerObservable(): Observable<void> {
@@ -80,8 +81,8 @@ export class VerifyCustomerComponent implements OnInit {
         this.httpClient.put('http://localHost:3000/api/addFunds', { 'email': this.transaction.receiver, 'amount': this.transaction.amount }).subscribe((receiver: any) => {
           console.log('updated receiver funds')
           //TODO: DELETE localhost:3000 when deploy to heroku
-          // update sender fund
-          this.httpClient.put('http://localHost:3000/api/addFunds', { 'email': this.transaction.sender, 'amount': this.transaction.amount }).subscribe((receiver: any) => {
+          // update sender fund 
+          this.httpClient.put('http://localHost:3000/api/subtractFunds', { 'email': this.transaction.sender, 'amount': this.transaction.amount }).subscribe((receiver: any) => {
             console.log('updated sender funds.')
           }, error => console.log(error));
           //adding transaction to sender
@@ -100,11 +101,11 @@ export class VerifyCustomerComponent implements OnInit {
           error => console.log('User not found.', error));
 
       } else {
-        console.log('not enough funds');
+        this.isFunds = false;
       }
 
     } else {
-      console.log("don't recognize");
+      this.isVerified = false;
     }
 
   }
