@@ -7,7 +7,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     password: DataTypes.STRING,
-    photo: DataTypes.STRING,
     availableFunds: {
       type: DataTypes.DOUBLE,
       defaultValue: 0

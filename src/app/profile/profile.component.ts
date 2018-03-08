@@ -33,7 +33,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.customer = this.appComponent.customer || this.route.navigate(['signup']);
     this.oldPassword = this.customer.password;
-    console.log(this.customer.Transactions);
+
+    console.log(this.customer);
   }
 
   ngAfterViewInit() {
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+
     this.httpClient.put('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
       console.log("successfully create customer");
     });
