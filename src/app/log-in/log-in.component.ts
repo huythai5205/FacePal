@@ -33,7 +33,7 @@ export class LogInComponent {
       } else {
         console.log("Invalid email or password");
         this.router.navigate(['home']);
-      }
+      }                
     });
   }
 
