@@ -1,26 +1,24 @@
-<nav class="nav-extended">
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo">FacePal</a>
-  </div>
-  <div class="nav-content">
+<nav class="nav-extended" style="background-color:white;">
+
+  <div class="container nav-content">
     <ul class="tabs tabs-transparent">
       <li class="tab">
-        <a routerLink="home">Home</a>
+        <a style="color:black" routerLink="home">Home</a>
       </li>
       <li *ngIf="!isSignIn" class="tab">
-        <a routerLink="signup">Sign Up</a>
+        <a style="color:black" routerLink="signup">Sign Up</a>
       </li>
       <li *ngIf="!isSignIn" class="tab">
-        <a routerLink="login">Log In</a>
+        <a style="color:black" routerLink="login">Log In</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
-        <a routerLink="profile">Profile</a>
+        <a style="color:black" routerLink="profile">Profile</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
-        <a (click)="logOut()">Log Out</a>
+        <a (click)="logOut()" style="color:black">Log Out</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
-        <a routerLink="verify-customer">Send Money</a>
+        <a style="color:black" routerLink="verify-customer">Send Money</a>
       </li>
     </ul>
   </div>
