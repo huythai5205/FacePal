@@ -1,45 +1,66 @@
-<h4>Create Your Profile</h4>
+<div class="container animated fadeIn">
+  <div class="row">
+    <div class="col s12 m10 offset-m1">
+      <div class="card">
+        <div class="card-title white-text center-align">
+          <h4>Create Your Profile</h4>
+        </div>
 
-<form (ngSubmit)="onSubmit()" #signUpForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
+        <div class="card-content">
+          <form (ngSubmit)="onSubmit()" #signUpForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
+            <div class="row">
+              <div class="form-group">
+                <input placeholder="First Name" id="firstName" type="text" class="form-control" name="firstName" required [(ngModel)]="customer.firstName"
+                  #firstName="ngModel" (change)="log(firstName)">
+                <label for="firstName">{{customer.firstName}}</label>
+                <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required</div>
+              </div>
 
-  <div class="form-group">
-    <label for="firstName">First Name {{customer.firstName}}</label>
-    <input id="firstName" type="text" class="form-control" name="firstName" required [(ngModel)]="customer.firstName" #firstName="ngModel"
-      (change)="log(firstName)">
-    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required</div>
-  </div>
+              <div class="form-group">
+                <input placeholder="Last Name" id="lastName" type="text" class="form-control" name="lastName" required [(ngModel)]="customer.lastName"
+                  #lastName="ngModel">
+                <label for="lastName">{{customer.lastName}}</label>
+                <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">Last Name is required</div>
+              </div>
+            </div>
 
-  <div class="form-group">
-    <label for="lastName">Last Name {{customer.lastName}}</label>
-    <input id="lastName" type="text" class="form-control" name="lastName" required [(ngModel)]="customer.lastName" #lastName="ngModel">
-    <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">Last Name is required</div>
-  </div>
+            <div class="row">
+              <div class="form-group">
+                <input placeholder="Date Of Birth" id="DOB" type="date" class="form-control" name="DOB" required [(ngModel)]="customer.DOB"
+                  #DOB="ngModel">
+                <label for="DOB">{{customer.DOB}}</label>
+                <div class="alert alert-danger" *ngIf="DOB.touched && !DOB.valid">Date of Birth is required</div>
+              </div>
+            </div>
 
-  <div class="form-group">
-    <label for="DOB">Date of Birth {{customer.DOB}}</label>
-    <input id="DOB" type="date" class="form-control" name="DOB" required [(ngModel)]="customer.DOB" #DOB="ngModel">
-    <div class="alert alert-danger" *ngIf="DOB.touched && !DOB.valid">Date of Birth is required</div>
-  </div>
+            <div class="row">
+              <div class="form-group">
+                <input placeholder="Email" id="email" type="text" class="form-control" name="email" required pattern="email" [(ngModel)]="customer.email"
+                  #email="ngModel" (change)="log(email)">
+                <label for="email">{{customer.email}}</label>
+                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                </div>
+                <div *ngIf="email.errors.required">Photo is required</div>
+                <div *ngIf="email.errors.pattern">Need to be in email format</div>
+              </div>
+            </div>
 
-  <div class="form-group">
-    <label for="email">email {{customer.email}}</label>
-    <input id="email" type="text" class="form-control" name="email" required pattern="email" [(ngModel)]="customer.email" #email="ngModel"
-      (change)="log(email)">
-    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-      <div *ngIf="email.errors.required">Photo is required</div>
-      <div *ngIf="email.errors.pattern">Need to be in email format</div>
+            <div class="form-group">
+              <label for="password">{{customer.password}}</label>
+              <input placeholder="Password" id="password" type="text" class="form-control" name="password" required [(ngModel)]="customer.password"
+                #password="ngModel">
+              <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Password is required</div>
+            </div>
+            <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">takeAPicture</a>
+
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <div class="form-group">
-    <label for="password">Password {{customer.password}}</label>
-    <input id="password" type="text" class="form-control" name="password" required [(ngModel)]="customer.password" #password="ngModel">
-    <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Password is required</div>
-  </div>
-  <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">takeAPicture</a>
-
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
 
 <!-- Modal Trigger -->
 
