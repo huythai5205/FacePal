@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
 // Webcam
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
@@ -26,7 +28,7 @@ export class SignUpComponent implements AfterViewInit {
     password: ''
   }
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router, private appComponent: AppComponent) { }
 
   ngAfterViewInit() {
     $('#modal1').modal();
@@ -38,6 +40,9 @@ export class SignUpComponent implements AfterViewInit {
       console.log("successfully create customer");
     });
     this.onEnroll();
+    this.appComponent.isSignIn = true;
+    this.appComponent.customer = this.customer;
+    this.router.navigate(['profile']);
   }
 
   log(x) {
