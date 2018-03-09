@@ -7,7 +7,7 @@
         </div>
         <div class="card-content">
           <form (ngSubmit)="onSubmit()" #logInForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
-            <input type="text" placeholder="Email" name="email" [(ngModel)]="customer.email" #email="ngModel">
+            <input type="text" placeholder="Email" name="email" [(ngModel)]="transaction.receiver" #email="ngModel">
 
             <input id="amount" type="number" name="amount" [(ngModel)]="transaction.amount" #amount="ngModel">
             <div class="alert alert-danger" *ngIf="!isUser">
@@ -22,6 +22,10 @@
             <div class="alert alert-danger" *ngIf="verifyImage!=''">
               <h5>Please take a picture.</h5>
             </div>
+            <div class="alert alert-danger" *ngIf="isMissingFields">
+              <h5>Please fill out all fields</h5>
+            </div>
+            <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">Retake Picture</a>
 
             <button type="submit" class="btn btn-default">Submit</button>
           </form>

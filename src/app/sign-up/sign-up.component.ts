@@ -17,7 +17,7 @@ declare let $: any;
 
 export class SignUpComponent implements AfterViewInit {
 
-  private profileImage: string;
+  private profileImage: string = '';
   private isMissingFields: boolean = false;
   private isMissingPhoto: boolean = false;
   private isPicture: boolean = false;
@@ -37,11 +37,14 @@ export class SignUpComponent implements AfterViewInit {
   }
 
   onSubmit() {
+    this.isMissingFields, this.isMissingPhoto = false;
     let inputs = $("input");
     for (let i = 0; i < inputs.length; i++) {
       if (inputs[i].value === '') {
         this.isMissingFields = true;
         break;
+      } else {
+        this.isMissingFields = false;
       }
     }
     if (this.profileImage === '') {
@@ -50,20 +53,20 @@ export class SignUpComponent implements AfterViewInit {
     if (!this.isMissingFields && !this.isMissingPhoto) {
       //TODO: DELETE localhost:3000 when deploy to heroku
       this.httpClient.post('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
-        console.log("successfully create customer");
+        this.onEnroll();
+        this.appComponent.isSignIn = true;
+        this.appComponent.customer = data;
+        this.router.navigate(['profile']);
       });
-      this.onEnroll();
-      this.appComponent.isSignIn = true;
-      this.appComponent.customer = this.customer;
-      this.router.navigate(['profile']);
+
     }
 
   }
 
-
   takeAPicture() {
     $('#modal1').modal('open');
   }
+
   onEnroll() {
 
     var request = new XMLHttpRequest();

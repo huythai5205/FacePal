@@ -26,6 +26,7 @@ export class VerifyCustomerComponent implements OnInit {
   private isFunds = true;
   private isUser = true;
   private isVerified = true;
+  private isMissingFields = false;
   private transaction = {
     sender: '',
     receiver: '',
@@ -71,8 +72,14 @@ export class VerifyCustomerComponent implements OnInit {
   }
 
   onSubmit() {
-
-    if (confidenceNumber > 0.6) {
+    let inputs = $("input");
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].value === '') {
+        this.isMissingFields = true;
+        break;
+      }
+    }
+    if (confidenceNumber > 0.6 && !this.isMissingFields) {
       //check to see if there are enough funds
       if (this.customer.availableFunds >= this.transaction.amount) {
         this.customer.availableFunds -= +this.transaction.amount;
@@ -81,10 +88,6 @@ export class VerifyCustomerComponent implements OnInit {
         this.httpClient.put('http://localHost:3000/api/addFunds', { 'email': this.transaction.receiver, 'amount': this.transaction.amount }).subscribe((receiver: any) => {
           console.log('updated receiver funds')
           //TODO: DELETE localhost:3000 when deploy to heroku
-          // update sender fund 
-          this.httpClient.put('http://localHost:3000/api/subtractFunds', { 'email': this.transaction.sender, 'amount': this.transaction.amount }).subscribe((receiver: any) => {
-            console.log('updated sender funds.')
-          }, error => console.log(error));
           //adding transaction to sender
           this.httpClient.post('http://localHost:3000/api/transaction/:', this.transaction).subscribe((data: any) => {
             console.log("add transaction to sender.");
@@ -97,6 +100,14 @@ export class VerifyCustomerComponent implements OnInit {
             console.log("added transaction to receiver.");
           },
             error => console.log(error));
+
+          // update sender fund
+          this.httpClient.put('http://localHost:3000/api/subtractFunds', { 'email': this.transaction.sender, 'amount': this.transaction.amount }).subscribe((sender: any) => {
+            console.log(sender);
+            this.appComponent.customer = sender;
+            console.log('updated sender funds.');
+            this.router.navigate(['profile']);
+          }, error => console.log(error));
         },
           error => console.log('User not found.', error));
 

@@ -7,9 +7,11 @@
         </div>
         <div class="card-content">
           <form (ngSubmit)="onSubmit()" #logInForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
+
             <input type="text" placeholder="Email" name="email" [(ngModel)]="customer.email" #email="ngModel">
 
             <input type="password" placeholder="Password" name="password" [(ngModel)]="customer.password" #password="ngModel">
+
             <div class="alert alert-danger" *ngIf="isIncorrect">
               Your password or email is incorrect.
             </div>

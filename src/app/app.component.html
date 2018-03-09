@@ -1,24 +1,24 @@
-<nav class="nav-extended" style="background-color:white;">
-
+<nav class="nav-extended" style="background-color:#0b182a;">
   <div class="container nav-content">
     <ul class="tabs tabs-transparent">
+      <img src="./assets/images/facepal_logo.png" alt="Smiley face" height="42">
       <li class="tab">
-        <a style="color:black" routerLink="home">Home</a>
+        <a routerLink="home">Home</a>
       </li>
       <li *ngIf="!isSignIn" class="tab">
-        <a style="color:black" routerLink="signup">Sign Up</a>
+        <a routerLink="signup">Sign Up</a>
       </li>
       <li *ngIf="!isSignIn" class="tab">
-        <a style="color:black" routerLink="login">Log In</a>
+        <a routerLink="login">Log In</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
-        <a style="color:black" routerLink="profile">Profile</a>
+        <a routerLink="profile">Profile</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
-        <a (click)="logOut()" style="color:black">Log Out</a>
+        <a (click)="logOut()">Log Out</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
-        <a style="color:black" routerLink="verify-customer">Send Money</a>
+        <a routerLink="verify-customer">Send Money</a>
       </li>
     </ul>
   </div>

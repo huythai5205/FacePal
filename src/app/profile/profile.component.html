@@ -8,13 +8,13 @@
 
         <div class="card-content">
           <form (ngSubmit)="onSubmit()" #signUpForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
-
+            <label>First Name:</label>
             <input placeholder="First Name" type="text" name="firstName" [(ngModel)]="customer.firstName" #firstName="ngModel">
-
+            <label>Last Name:</label>
             <input placeholder="Last Name" type="text" name="lastName" [(ngModel)]="customer.lastName" #lastName="ngModel">
-
+            <label>Data Of Birth:</label>
             <input placeholder="Date Of Birth" type="date" name="DOB" [(ngModel)]="customer.DOB" #DOB="ngModel">
-
+            <label>Email:</label>
             <input placeholder="Email" type="text" name="email" [(ngModel)]="customer.email" #email="ngModel">
 
             <div *ngIf="isMissingField">
@@ -36,7 +36,7 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Your Transactions</span>
-          <h6>Amount: $ {{customer.availableFunds}}</h6>
+          <h6>Available Funds: ${{customer.availableFunds}}</h6>
           <table>
             <thead>
               <tr>
@@ -48,7 +48,7 @@
             <tr *ngFor="let T of customer.Transactions">
               <td>{{T.sender}}</td>
               <td>{{T.receiver}}</td>
-              <td>{{T.amount}}</td>
+              <td>${{T.amount}}</td>
             </tr>
           </table>
         </div>
