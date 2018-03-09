@@ -1,49 +1,51 @@
-<div class="container animated fadeIn">
-  <div class="row">
-    <div class="col s12 m6">
-      <div class="card">
-        <div class="card-content white-text">
-          <span class="card-title">Recent Activity</span>
-          <table>
-            <thead>
-              <tr>
-                <th>Sender</th>
-                <th>Receiver</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tr *ngFor="let T of customer.Transactions">
-              <td>{{T.sender}}</td>
-              <td>{{T.receiver}}</td>
-              <td>{{T.amount}}</td>
-            </tr>
-          </table>
+<section id="content">
+  <div class="container">
+    <div id="profile-page" class="section">
+      <div id="profile-page-header" class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="https://images.unsplash.com/photo-1518199117568-a0fc6494fedf?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f3096e2c38cec09b33cd1a962dfa6130&auto=format&fit=crop&w=1955&q=80"
+            alt="user background">
         </div>
-      </div>
-    </div>
-    <div class="col s12 m6">
-      <div class="card">
-        <div class="card-content white-text">
-          <span class="card-title">Available Balance</span>
-
-          <h6>$ {{customer.availableFunds}}</h6>
-
-        </div>
-      </div>
-      <!-- Modal Structure -->
-      <div id="modal1" class="modal">
-        <div class="modal-content">
-          <div style="text-align:center">
-            <div *ngIf="!isPicture">
-              <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
-              <br/>
-              <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
+        <figure class="card-profile-image">
+          <img src="https://cdn3.iconfinder.com/data/icons/black-easy/512/538303-user_512x512.png" alt="profile image" class="circle z-depth-2 responsive-img activator">
+        </figure>
+        <div class="card-content">
+          <div class="row">
+            <div class="col s4 offset-s2">
+              <h1 class="card-title white-text text-darken-4">{{customer.firstName}}</h1>
             </div>
-
-            <div class="snapshot" *ngIf="webcamImage && isPicture">
-              <img [src]="webcamImage.imageAsDataUrl" />
-              <button (click)="isPicture = false">Retake Picture</button>
+            <div class="col s5 center-align">
+              <h4 class="card-title white-text text-darken-4">Available Balance:</h4>
+              <h3 class="white-text">$ {{customer.availableFunds}}</h3>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="container animated fadeIn">
+    <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content white-text">
+            <span class="card-title">Recent Activity</span>
+            <table>
+              <thead>
+                <tr>
+                  <th>Sender</th>
+                  <th>Receiver</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tr *ngFor="let T of customer.Transactions">
+                <td>{{T.sender}}</td>
+                <td>{{T.receiver}}</td>
+                <td>{{T.amount}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

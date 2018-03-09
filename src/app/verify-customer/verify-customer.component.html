@@ -40,14 +40,14 @@
   <div class="modal-content">
     <div style="text-align:center">
       <div *ngIf="!isPicture">
-        <button id="snapshotBtn" (click)="triggerSnapshot()">Take a Picture</button>
+        <button id="snapshotBtn" (click)="triggerSnapshot()">Verify!!</button>
         <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
-
       </div>
 
       <div class="snapshot" *ngIf="webcamImage && isPicture">
         <img [src]="webcamImage.imageAsDataUrl" />
         <button (click)="isPicture = false">Retake Picture</button>
+        <button (click)="webcamImage && isPicture">Send funds!</button>
       </div>
     </div>
   </div>
