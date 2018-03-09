@@ -62,7 +62,6 @@ export class VerifyCustomerComponent implements OnInit {
     console.info("received webcam image", webcamImage);
     this.webcamImage = webcamImage;
     this.verifyImage = this.webcamImage.imageAsDataUrl.split(",")[1];
-    console.log(this.webcamImage);
   }
 
   public get triggerObservable(): Observable<void> {

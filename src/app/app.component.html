@@ -1,9 +1,7 @@
-<nav class="nav-extended">
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo">FacePal</a>
-  </div>
-  <div class="nav-content">
+<nav class="nav-extended" style="background-color:#0b182a;">
+  <div class="container nav-content">
     <ul class="tabs tabs-transparent">
+      <img src="./assets/images/facepal_logo.png" alt="Smiley face" height="42">
       <li class="tab">
         <a routerLink="home">Home</a>
       </li>
@@ -16,12 +14,76 @@
       <li *ngIf="isSignIn" class="tab">
         <a routerLink="profile">Profile</a>
       </li>
+
+      <li *ngIf="isSignIn" class="tab">
+        <a routerLink="verify-customer">Send Money</a>
+      </li>
       <li *ngIf="isSignIn" class="tab">
         <a (click)="logOut()">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<!--router views-->
+<router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-->
+<nav class="nav-extended">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">FacePal</a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+        <a routerLink="home">Home</a>
+      </li>
+      <li>
+        <a (click)="logOut()">Log Out</a>
+      </li>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <li>
+        <a routerLink="home">Home</a>
+      </li>
+      <li>
+        <a (click)="logOut()">Log Out</a>
+      </li>
+    </ul>
+  </div>
+  <div class="nav-content">
+    <ul class="tabs tabs-transparent">
+
+      <li *ngIf="!isSignIn" class="tab">
+        <a routerLink="signup">Sign Up</a>
+      </li>
+      <li *ngIf="!isSignIn" class="tab">
+        <a routerLink="login">Log In</a>
+      </li>
+      <li *ngIf="isSignIn" class="tab">
+        <a routerLink="profile">Profile</a>
       </li>
       <li *ngIf="isSignIn" class="tab">
         <a routerLink="verify-customer">Send Money</a>
       </li>
+      <li *ngIf="isSignIn" class="tab">
+        <a (click)="logOut()">Log Out</a>
+      </li>
+
     </ul>
   </div>
 </nav>

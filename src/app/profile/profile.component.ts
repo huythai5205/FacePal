@@ -15,28 +15,28 @@ declare let $: any;
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit, AfterViewInit {
 
-  ngOnInit() {
-    this.customer = this.appComponent.customer || this.route.navigate(['signup']);
-    this.oldPassword = this.customer.password;
-
-    console.log(this.customer);
-  }
-  customer: any;
+  private customer: any;
   private isPicture: boolean = false;
-  private oldPassword;
+  private profileImg = '';
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
 
   // latest snapshot
   public webcamImage: WebcamImage = null;
 
-  private profileImg;
-
   constructor(private route: Router, private appComponent: AppComponent, private httpClient: HttpClient) { }
 
-
+  ngOnInit() {
+    this.customer = this.appComponent.customer || this.route.navigate(['signup']);
+    this.httpClient.get('http://localHost:3000/api/profile/' + this.customer.email, ).subscribe((data: any) => {
+      this.customer = data;
+      this.appComponent.customer = data;
+      console.log(data);
+    });
+  }
 
   ngAfterViewInit() {
     $('#modal1').modal();
@@ -47,24 +47,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-
-    this.httpClient.put('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
+    this.httpClient.put('http://localHost:3000/api/updateCustomer', this.customer).subscribe((data: any) => {
       console.log("successfully create customer");
     });
   }
 
   public triggerSnapshot(): void {
     this.trigger.next();
-    console.log(this.webcamImage);
     this.isPicture = true;
   }
 
   public handleImage(webcamImage: WebcamImage): void {
     console.info("received webcam image", webcamImage);
     this.webcamImage = webcamImage;
-    console.log(this.webcamImage);
     this.profileImg = this.webcamImage.imageAsDataUrl.split(",")[1];
-    console.log(this.profileImg);
   }
 
   public get triggerObservable(): Observable<void> {

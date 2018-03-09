@@ -8,21 +8,10 @@
         <div class="card-content">
           <form (ngSubmit)="onSubmit()" #logInForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
 
-            <div class="form-group">
-              <label for="email">email {{customer.email}}</label>
-              <input id="email" type="text" class="form-control" name="email" required pattern="email" [(ngModel)]="customer.email" #email="ngModel">
-              <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-                <div *ngIf="email.errors.required">Photo is required</div>
-                <div *ngIf="email.errors.pattern">Need to be in email format</div>
-              </div>
-            </div>
+            <input type="text" placeholder="Email" name="email" [(ngModel)]="customer.email" #email="ngModel">
 
+            <input type="password" placeholder="Password" name="password" [(ngModel)]="customer.password" #password="ngModel">
 
-            <div class="form-group">
-              <label for="password">Password {{customer.password}}</label>
-              <input id="password" type="text" class="form-control" name="password" required [(ngModel)]="customer.password" #password="ngModel">
-              <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Password is required</div>
-            </div>
             <div class="alert alert-danger" *ngIf="isIncorrect">
               Your password or email is incorrect.
             </div>
@@ -30,3 +19,7 @@
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
