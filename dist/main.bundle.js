@@ -88,7 +88,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"nav-extended\" style=\"background-color:#0b182a;\">\r\n  <div class=\"container nav-content\">\r\n    <ul class=\"tabs tabs-transparent\">\r\n      <img src=\"./assets/images/facepal_logo.png\" alt=\"Smiley face\" height=\"42\">\r\n      <li class=\"tab\">\r\n        <a routerLink=\"home\">Home</a>\r\n      </li>\r\n      <li *ngIf=\"!isSignIn\" class=\"tab\">\r\n        <a routerLink=\"signup\">Sign Up</a>\r\n      </li>\r\n      <li *ngIf=\"!isSignIn\" class=\"tab\">\r\n        <a routerLink=\"login\">Log In</a>\r\n      </li>\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a routerLink=\"profile\">Profile</a>\r\n      </li>\r\n\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a routerLink=\"verify-customer\">Send Money</a>\r\n      </li>\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a (click)=\"logOut()\">Log Out</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<!--router views-->\r\n<router-outlet></router-outlet>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!-->\r\n<nav class=\"nav-extended\">\r\n  <div class=\"nav-wrapper\">\r\n    <a href=\"#\" class=\"brand-logo\">FacePal</a>\r\n    <a href=\"#\" data-activates=\"mobile-demo\" class=\"button-collapse\">\r\n      <i class=\"material-icons\">menu</i>\r\n    </a>\r\n    <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n      <li>\r\n        <a routerLink=\"home\">Home</a>\r\n      </li>\r\n      <li>\r\n        <a (click)=\"logOut()\">Log Out</a>\r\n      </li>\r\n    </ul>\r\n    <ul class=\"side-nav\" id=\"mobile-demo\">\r\n      <li>\r\n        <a routerLink=\"home\">Home</a>\r\n      </li>\r\n      <li>\r\n        <a (click)=\"logOut()\">Log Out</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <div class=\"nav-content\">\r\n    <ul class=\"tabs tabs-transparent\">\r\n\r\n      <li *ngIf=\"!isSignIn\" class=\"tab\">\r\n        <a routerLink=\"signup\">Sign Up</a>\r\n      </li>\r\n      <li *ngIf=\"!isSignIn\" class=\"tab\">\r\n        <a routerLink=\"login\">Log In</a>\r\n      </li>\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a routerLink=\"profile\">Profile</a>\r\n      </li>\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a routerLink=\"verify-customer\">Send Money</a>\r\n      </li>\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a (click)=\"logOut()\">Log Out</a>\r\n      </li>\r\n\r\n    </ul>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<!--router views-->\r\n<router-outlet></router-outlet>"
+module.exports = "<nav class=\"nav-extended\" style=\"background-color:#0b182a;\">\r\n  <div class=\"container nav-content\">\r\n    <ul class=\"tabs tabs-transparent\">\r\n      <img src=\"./assets/images/facepal_logo.png\" alt=\"Smiley face\" height=\"42\">\r\n      <li class=\"tab\">\r\n        <a routerLink=\"home\">Home</a>\r\n      </li>\r\n      <li *ngIf=\"!isSignIn\" class=\"tab\">\r\n        <a routerLink=\"signup\">Sign Up</a>\r\n      </li>\r\n      <li *ngIf=\"!isSignIn\" class=\"tab\">\r\n        <a routerLink=\"login\">Log In</a>\r\n      </li>\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a routerLink=\"profile\">Profile</a>\r\n      </li>\r\n\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a routerLink=\"verify-customer\">Send Money</a>\r\n      </li>\r\n      <li *ngIf=\"isSignIn\" class=\"tab\">\r\n        <a (click)=\"logOut()\">Log Out</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<!--router views-->\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -337,7 +337,7 @@ var LogInComponent = /** @class */ (function () {
     LogInComponent.prototype.onSubmit = function () {
         var _this = this;
         //TODO: CHANGE TO './api/customer
-        this.httpClient.get('http://localhost:3000/api/customer/' + this.customer.email + "+" + this.customer.password).subscribe(function (data) {
+        this.httpClient.get('./api/customer/' + this.customer.email + "+" + this.customer.password).subscribe(function (data) {
             if (data) {
                 _this.appComponent.isSignIn = true;
                 _this.appComponent.customer = data;
@@ -428,7 +428,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.customer = this.appComponent.customer || this.route.navigate(['signup']);
-        this.httpClient.get('http://localHost:3000/api/profile/' + this.customer.email).subscribe(function (data) {
+        this.httpClient.get('./api/profile/' + this.customer.email).subscribe(function (data) {
             _this.customer = data;
             _this.appComponent.customer = data;
             console.log(data);
@@ -441,7 +441,7 @@ var ProfileComponent = /** @class */ (function () {
         $('#modal1').modal('open');
     };
     ProfileComponent.prototype.onSubmit = function () {
-        this.httpClient.put('http://localHost:3000/api/updateCustomer', this.customer).subscribe(function (data) {
+        this.httpClient.put('./api/updateCustomer', this.customer).subscribe(function (data) {
             console.log("successfully create customer");
         });
     };
@@ -568,7 +568,7 @@ var SignUpComponent = /** @class */ (function () {
         }
         if (!this.isMissingFields && !this.isMissingPhoto) {
             //TODO: DELETE localhost:3000 when deploy to heroku
-            this.httpClient.post('http://localHost:3000/api/customer', this.customer).subscribe(function (data) {
+            this.httpClient.post('./api/customer', this.customer).subscribe(function (data) {
                 _this.onEnroll();
                 _this.appComponent.isSignIn = true;
                 _this.appComponent.customer = data;
@@ -745,20 +745,20 @@ var VerifyCustomerComponent = /** @class */ (function () {
                 this.customer.availableFunds -= +this.transaction.amount;
                 console.log(this.transaction);
                 //update receiver fund
-                this.httpClient.put('http://localHost:3000/api/addFunds', { 'email': this.transaction.receiver, 'amount': this.transaction.amount }).subscribe(function (receiver) {
+                this.httpClient.put('./api/addFunds', { 'email': this.transaction.receiver, 'amount': this.transaction.amount }).subscribe(function (receiver) {
                     console.log('updated receiver funds');
                     //TODO: DELETE localhost:3000 when deploy to heroku
                     //adding transaction to sender
-                    _this.httpClient.post('http://localHost:3000/api/transaction/:', _this.transaction).subscribe(function (data) {
+                    _this.httpClient.post('./api/transaction/:', _this.transaction).subscribe(function (data) {
                         console.log("add transaction to sender.");
                     }, function (error) { return console.log(error); });
                     //adding transaction to receiver
                     _this.transaction.CustomerId = receiver.id;
-                    _this.httpClient.post('http://localHost:3000/api/transaction/:', _this.transaction).subscribe(function (data) {
+                    _this.httpClient.post('./api/transaction/:', _this.transaction).subscribe(function (data) {
                         console.log("added transaction to receiver.");
                     }, function (error) { return console.log(error); });
                     // update sender fund
-                    _this.httpClient.put('http://localHost:3000/api/subtractFunds', { 'email': _this.transaction.sender, 'amount': _this.transaction.amount }).subscribe(function (sender) {
+                    _this.httpClient.put('./api/subtractFunds', { 'email': _this.transaction.sender, 'amount': _this.transaction.amount }).subscribe(function (sender) {
                         console.log(sender);
                         _this.appComponent.customer = sender;
                         _this.router.navigate(['profile']);
