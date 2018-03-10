@@ -12,7 +12,6 @@ module.exports = function (app) {
   });
 
   app.get('/api/customer/:emailPassword', (req, res) => {
-    console.log('getting customer', req.params.emailPassword);
     const temp = req.params.emailPassword.split("+");
     const email = temp[0];
     const password = temp[1];
@@ -29,14 +28,23 @@ module.exports = function (app) {
     });
   });
 
+  app.get('/api/profile/:email', (req, res) => {
+    db.Customer.find({
+      where: {
+        email: req.params.email
+      },
+      include: [db.Transaction]
+    }).then((data) => {
+      res.json(data);
+    });
+  });
+
 
   app.post('/api/customer', (req, res) => {
     console.log("creating customer", req.body);
     bcrypt.genSalt(11, function (err, salt) {
       if (err) console.log(err);
-
       bcrypt.hash(req.body.password, salt, function (err, hash) {
-
         if (err) throw err;
         req.body.password = hash;
         db.Customer.create(req.body).then((data) => {
@@ -46,7 +54,7 @@ module.exports = function (app) {
     });
   });
 
-  app.put('/api/customer', (req, res) => {
+  app.put('/api/updateCustomer', (req, res) => {
     console.log("updating customer", req.body);
     db.Customer.update(req.body).then((data) => {
       res.json(data);
@@ -60,7 +68,7 @@ module.exports = function (app) {
         email: req.body.email
       }
     }).then((data) => {
-      data.decrement('availableFunds', {
+      data.increment('availableFunds', {
         by: req.body.amount
       });
       res.json(data);
@@ -74,14 +82,10 @@ module.exports = function (app) {
         email: req.body.email
       }
     }).then((data) => {
-      data.increment('availableFunds', {
+      data.decrement('availableFunds', {
         by: req.body.amount
       });
       res.json(data);
     });
-  });
-
-  app.delete('/api/customer', (req, res) => {
-
   });
 };

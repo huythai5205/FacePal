@@ -1,0 +1,19 @@
+.tab {
+  /* background-color: red; */
+  color: black;
+  border-color: black;
+}
+
+/* .tabs-transparent {
+  color: pink;
+  background-color: white;
+} */
+
+.tab:hover {
+  /* color: pink; */
+  background-color: #a4bed2;
+}
+
+.tabs .indicator {
+  background-color: black;
+}
