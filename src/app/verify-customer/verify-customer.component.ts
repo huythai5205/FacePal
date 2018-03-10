@@ -21,8 +21,8 @@ let confidenceNumber = 0;
 export class VerifyCustomerComponent implements OnInit {
 
   private customer;
-  private verifyImage;
-  private isPicture = false;
+  private verifyImage = '';
+  private isPicture = true;
   private isFunds = true;
   private isUser = true;
   private isVerified = true;
@@ -105,11 +105,13 @@ export class VerifyCustomerComponent implements OnInit {
           this.httpClient.put('http://localHost:3000/api/subtractFunds', { 'email': this.transaction.sender, 'amount': this.transaction.amount }).subscribe((sender: any) => {
             console.log(sender);
             this.appComponent.customer = sender;
-            console.log('updated sender funds.');
             this.router.navigate(['profile']);
           }, error => console.log(error));
         },
-          error => console.log('User not found.', error));
+          error => {
+            console.log('User not found.', error);
+            this.isUser = false;
+          });
 
       } else {
         this.isFunds = false;
@@ -149,7 +151,5 @@ export class VerifyCustomerComponent implements OnInit {
     };
 
     request.send(JSON.stringify(body));
-
-
   }
 }

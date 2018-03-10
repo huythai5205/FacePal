@@ -33,20 +33,22 @@
       </div>
     </div>
   </div>
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <div style="text-align:center">
-        <div *ngIf="!isPicture">
-          <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
-          <br/>
-          <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
-        </div>
+</div>
 
-        <div class="snapshot" *ngIf="webcamImage && isPicture">
-          <img [src]="webcamImage.imageAsDataUrl" />
-          <button (click)="isPicture = false">Retake Picture</button>
-        </div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div style="text-align:center">
+      <div *ngIf="!isPicture">
+        <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+        <br/>
+        <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
+      </div>
+
+      <div class="snapshot" *ngIf="webcamImage && isPicture">
+        <img [src]="webcamImage.imageAsDataUrl" />
+        <button (click)="isPicture = false">Retake Picture</button>
       </div>
     </div>
   </div>
+</div>

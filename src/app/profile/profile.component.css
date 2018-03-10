@@ -1,8 +1,12 @@
 h6 {
-    font-size: 110%;
-    text-decoration: underline;
-  }
+  font-size: 110%;
+  text-decoration: underline;
+}
 
-  section {
-    margin-top: 40px;
-  }
+section {
+  margin-top: 40px;
+}
+
+form {
+  padding: 3%;
+}
