@@ -7,9 +7,10 @@
         </div>
         <div class="card-content">
           <form (ngSubmit)="onSubmit()" #logInForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
-            <input type="text" placeholder="Email" name="email" [(ngModel)]="transaction.receiver" #email="ngModel">
+            <input type="text" placeholder="Payee ID" name="email" [(ngModel)]="transaction.receiver" #email="ngModel">
 
-            <input id="amount" type="number" name="amount" [(ngModel)]="transaction.amount" #amount="ngModel">
+
+            <input id="amount" type="number" name="amount" placeholder="$" [(ngModel)]="transaction.amount" #amount="ngModel">
             <div class="alert alert-danger" *ngIf="!isUser">
               <h5>User doesn't exist.</h5>
             </div>
@@ -25,9 +26,11 @@
             <div class="alert alert-danger" *ngIf="isMissingFields">
               <h5>Please fill out all fields</h5>
             </div>
-            <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">Retake Picture</a>
+
+            <a class="waves-effect waves-light btn" type="button" (click)="takeAPicture()">Lets verify!</a>
 
             <button type="submit" class="btn btn-default">Submit</button>
+
           </form>
         </div>
       </div>
@@ -41,14 +44,14 @@
   <div class="modal-content">
     <div style="text-align:center">
       <div *ngIf="!isPicture">
+        <button id="snapshotBtn" (click)="triggerSnapshot()">Verify!!</button>
         <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
-        <br/>
-        <button id="snapshotBtn" (click)="triggerSnapshot();">Take a Picture</button>
       </div>
 
       <div class="snapshot" *ngIf="webcamImage && isPicture">
         <img [src]="webcamImage.imageAsDataUrl" />
         <button (click)="isPicture = false">Retake Picture</button>
+        <button (click)="webcamImage && isPicture">Send funds!</button>
       </div>
     </div>
   </div>

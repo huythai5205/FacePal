@@ -30,4 +30,5 @@ export class HomeComponent implements OnInit, AfterViewInit {
   autoplay() {
     $('.carousel').carousel(('next'), 4000);
   }
+
 }
