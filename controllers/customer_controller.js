@@ -56,7 +56,12 @@ module.exports = function (app) {
 
   app.put('/api/updateCustomer', (req, res) => {
     console.log("updating customer", req.body);
-    db.Customer.update(req.body).then((data) => {
+    db.Customer.update(
+      req.body, {
+        where: {
+          id: req.body.id
+        }
+      }).then((data) => {
       res.json(data);
     });
   });

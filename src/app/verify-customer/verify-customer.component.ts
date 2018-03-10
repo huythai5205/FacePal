@@ -22,7 +22,7 @@ export class VerifyCustomerComponent implements OnInit {
 
   private customer;
   private verifyImage = '';
-  private isPicture = true;
+  private isPicture = false;
   private isFunds = true;
   private isUser = true;
   private isVerified = true;

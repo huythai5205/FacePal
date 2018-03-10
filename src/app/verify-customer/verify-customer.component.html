@@ -20,7 +20,7 @@
             <div class="alert alert-danger" *ngIf="!isVerified">
               <h5>Does not recognize.</h5>
             </div>
-            <div class="alert alert-danger" *ngIf="verifyImage!=''">
+            <div class="alert alert-danger" *ngIf="verifyImage==''">
               <h5>Please take a picture.</h5>
             </div>
             <div class="alert alert-danger" *ngIf="isMissingFields">
@@ -51,7 +51,6 @@
       <div class="snapshot" *ngIf="webcamImage && isPicture">
         <img [src]="webcamImage.imageAsDataUrl" />
         <button (click)="isPicture = false">Retake Picture</button>
-        <button (click)="webcamImage && isPicture">Send funds!</button>
       </div>
     </div>
   </div>
