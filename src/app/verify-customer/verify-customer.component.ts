@@ -85,24 +85,24 @@ export class VerifyCustomerComponent implements OnInit {
         this.customer.availableFunds -= +this.transaction.amount;
         console.log(this.transaction);
         //update receiver fund
-        this.httpClient.put('http://localHost:3000/api/addFunds', { 'email': this.transaction.receiver, 'amount': this.transaction.amount }).subscribe((receiver: any) => {
+        this.httpClient.put('./api/addFunds', { 'email': this.transaction.receiver, 'amount': this.transaction.amount }).subscribe((receiver: any) => {
           console.log('updated receiver funds')
           //TODO: DELETE localhost:3000 when deploy to heroku
           //adding transaction to sender
-          this.httpClient.post('http://localHost:3000/api/transaction/:', this.transaction).subscribe((data: any) => {
+          this.httpClient.post('./api/transaction/:', this.transaction).subscribe((data: any) => {
             console.log("add transaction to sender.");
           },
             error => console.log(error));
 
           //adding transaction to receiver
           this.transaction.CustomerId = receiver.id;
-          this.httpClient.post('http://localHost:3000/api/transaction/:', this.transaction).subscribe((data: any) => {
+          this.httpClient.post('./api/transaction/:', this.transaction).subscribe((data: any) => {
             console.log("added transaction to receiver.");
           },
             error => console.log(error));
 
           // update sender fund
-          this.httpClient.put('http://localHost:3000/api/subtractFunds', { 'email': this.transaction.sender, 'amount': this.transaction.amount }).subscribe((sender: any) => {
+          this.httpClient.put('./api/subtractFunds', { 'email': this.transaction.sender, 'amount': this.transaction.amount }).subscribe((sender: any) => {
             console.log(sender);
             this.appComponent.customer = sender;
             this.router.navigate(['profile']);

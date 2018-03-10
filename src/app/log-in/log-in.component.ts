@@ -19,7 +19,7 @@ export class LogInComponent {
 
   onSubmit() {
     //TODO: CHANGE TO './api/customer
-    this.httpClient.get('http://localhost:3000/api/customer/' + this.customer.email + "+" + this.customer.password).subscribe((data: any) => {
+    this.httpClient.get('./api/customer/' + this.customer.email + "+" + this.customer.password).subscribe((data: any) => {
       if (data) {
         this.appComponent.isSignIn = true;
         this.appComponent.customer = data;

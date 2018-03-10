@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.customer = this.appComponent.customer || this.route.navigate(['signup']);
-    this.httpClient.get('http://localHost:3000/api/profile/' + this.customer.email, ).subscribe((data: any) => {
+    this.httpClient.get('./api/profile/' + this.customer.email, ).subscribe((data: any) => {
       this.customer = data;
       this.appComponent.customer = data;
       console.log(data);
@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.httpClient.put('http://localHost:3000/api/updateCustomer', this.customer).subscribe((data: any) => {
+    this.httpClient.put('./api/updateCustomer', this.customer).subscribe((data: any) => {
       console.log("successfully create customer");
     });
   }

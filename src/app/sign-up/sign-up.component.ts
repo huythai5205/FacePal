@@ -52,7 +52,7 @@ export class SignUpComponent implements AfterViewInit {
     }
     if (!this.isMissingFields && !this.isMissingPhoto) {
       //TODO: DELETE localhost:3000 when deploy to heroku
-      this.httpClient.post('http://localHost:3000/api/customer', this.customer).subscribe((data: any) => {
+      this.httpClient.post('./api/customer', this.customer).subscribe((data: any) => {
         this.onEnroll();
         this.appComponent.isSignIn = true;
         this.appComponent.customer = data;
