@@ -20,14 +20,14 @@ let confidenceNumber = 0;
 
 export class VerifyCustomerComponent implements OnInit {
 
-  private customer;
-  private verifyImage = '';
-  private isPicture = false;
-  private isFunds = true;
-  private isUser = true;
-  private isVerified = true;
-  private isMissingFields = false;
-  private transaction = {
+  public customer;
+  public verifyImage = '';
+  public isPicture = false;
+  public isFunds = true;
+  public isUser = true;
+  public isVerified = true;
+  public isMissingFields = false;
+  public transaction = {
     sender: '',
     receiver: '',
     amount: '',

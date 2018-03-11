@@ -17,12 +17,12 @@ declare let $: any;
 
 export class SignUpComponent implements AfterViewInit {
 
-  private profileImage: string = '';
-  private isMissingFields: boolean = false;
-  private isMissingPhoto: boolean = false;
-  private isPicture: boolean = false;
+  public profileImage: string = '';
+  public isMissingFields: boolean = false;
+  public isMissingPhoto: boolean = false;
+  public isPicture: boolean = false;
 
-  private customer = {
+  public customer = {
     firstName: '',
     lastName: '',
     DOB: '',
