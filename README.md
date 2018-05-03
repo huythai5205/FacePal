@@ -11,7 +11,7 @@ User can sign up for an account and register their face with Kairos database.  U
 * Materializecss
 
 ### Back-end:
-* NodsJs
+* NodeJs
 * ExpressJs
 * mySQL
 * sequelize
